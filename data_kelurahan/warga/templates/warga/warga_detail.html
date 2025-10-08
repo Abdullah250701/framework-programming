@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Warga</title>
+</head>
+<body>
+    <h1>Detail Warga: {{ object.nama_lengkap }}</h1>
+    <p><strong>NIK:</strong> {{ object.nik }}</p>
+    <p><strong>Alamat:</strong> {{ object.alamat }}</p>
+    <p><strong>Tanggal Lahir:</strong> {{ object.tanggal_lahir }}</p>
+
+    <hr>
+    <h2>Daftar Pengaduan oleh {{ object.nama_lengkap }}</h2>
+    <ul>
+        {% for aduan in object.pengaduan.all %}
+        <li>
+            <strong>{{ aduan.judul }}</strong> (Status: {{ aduan.get_status_display }})
+            <p>{{ aduan.deskripsi }}</p>
+        </li>
+        {% empty %}
+        <li>Warga ini belum pernah membuat pengaduan.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

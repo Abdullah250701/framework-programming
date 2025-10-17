@@ -16,11 +16,18 @@
                 <strong>{{ pengaduan.judul }}</strong><br>
                 Pelapor: {{ pengaduan.pelapor.nama_lengkap }}<br>
                 Status: {{ pengaduan.get_status_display }}<br>
-                Deskripsi: {{ pengaduan.deskripsi }}
+                Deskripsi: {{ pengaduan.deskripsi }}<br>
+
+                <!-- Tambahkan link Edit dan Hapus -->
+                <a href="{% url 'pengaduan-edit' pengaduan.pk %}">Edit</a> | 
+                <a href="{% url 'pengaduan-hapus' pengaduan.pk %}">Hapus</a>
             </li>
+            <hr>
         {% empty %}
             <li>Belum ada data pengaduan.</li>
         {% endfor %}
     </ul>
+
+    <a href="{% url 'warga_list' %}">← Kembali ke Daftar Warga</a>
 </body>
 </html>

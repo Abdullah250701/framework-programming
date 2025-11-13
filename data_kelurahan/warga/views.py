@@ -2,6 +2,25 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from .models import Warga, Pengaduan
 from .forms import WargaForm, PengaduanForm
+# Impor baru untuk DRF
+from rest_framework.generics import ListAPIView, RetrieveAPIView
+from .serializers import WargaSerializer, PengaduanSerializer
+
+# ... (class view yang sudah ada untuk HTML) ...
+
+# --- API VIEWS ---
+class WargaListAPIView(ListAPIView):
+    queryset = Warga.objects.all()
+    serializer_class = WargaSerializer
+
+class WargaDetailAPIView(RetrieveAPIView):
+    queryset = Warga.objects.all()
+    serializer_class = WargaSerializer
+
+class PengaduanListAPIView(ListAPIView):
+    queryset = Pengaduan.objects.all()
+    serializer_class = PengaduanSerializer
+
 
 # Daftar warga
 class WargaListView(ListView):

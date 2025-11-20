@@ -3,21 +3,34 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from .models import Warga, Pengaduan
 from .forms import WargaForm, PengaduanForm
 # Impor baru untuk DRF
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+#from rest_framework.generics import ListAPIView, RetrieveAPIView
+
+# Impor baru untuk DRF
+from rest_framework import viewsets
+from .models import Warga, Pengaduan
 from .serializers import WargaSerializer, PengaduanSerializer
 
 # ... (class view yang sudah ada untuk HTML) ...
 
-# --- API VIEWS ---
-class WargaListAPIView(ListAPIView):
-    queryset = Warga.objects.all()
+# # --- API VIEWS pertemuan6---
+# class WargaListAPIView(ListAPIView):
+#     queryset = Warga.objects.all()
+#     serializer_class = WargaSerializer
+
+# class WargaDetailAPIView(RetrieveAPIView):
+#     queryset = Warga.objects.all()
+#     serializer_class = WargaSerializer
+
+# class PengaduanListAPIView(ListAPIView):
+#     queryset = Pengaduan.objects.all()
+#     serializer_class = PengaduanSerializer
+
+# --- API VIEWS pertemuan7---
+class WargaViewSet(viewsets.ModelViewSet):
+    queryset = Warga.objects.all().order_by('-tanggal_registrasi')
     serializer_class = WargaSerializer
 
-class WargaDetailAPIView(RetrieveAPIView):
-    queryset = Warga.objects.all()
-    serializer_class = WargaSerializer
-
-class PengaduanListAPIView(ListAPIView):
+class PengaduanViewSet(viewsets.ModelViewSet):
     queryset = Pengaduan.objects.all()
     serializer_class = PengaduanSerializer
 
